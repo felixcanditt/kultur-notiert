@@ -121,7 +121,7 @@ export default function App() {
       return checkedItem.rating ? checkedItem.rating : 0;
     }
 
-    if (watchlist.find((item) => item.id === checkedItem.id)) {
+    if (watchlist.find((item) => item._id === checkedItem._id)) {
       const checkedItemWithRating = {
         ...checkedItem,
         rating: currentRating()
@@ -129,7 +129,7 @@ export default function App() {
       setLibrary([checkedItemWithRating, ...library]);
       removeFromWatchlist(checkedItem);
     } else if (library.find((item) => item.id === checkedItem.id)) {
-      setWatchlist([checkedItem, ...watchlist]);
+      addToWatchlist(checkedItem);
       removeFromLibrary(checkedItem);
     }
   }
