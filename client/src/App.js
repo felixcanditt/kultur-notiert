@@ -83,12 +83,30 @@ export default function App() {
       );
   }
 
+  // function editWatchlist(editedItem) {
+  //   const updatedWatchlist = watchlist.filter(
+  //     (item) => item.id !== editedItem.id
+  //   );
+  // }
+
   function editWatchlist(editedItem) {
     const updatedWatchlist = watchlist.filter(
-      (item) => item.id !== editedItem.id
+      (item) => item._id !== editedItem._id
     );
-    setWatchlist([editedItem, ...updatedWatchlist]);
-    setItemToBeEdited();
+
+    fetch('http://localhost:4000/watchlist/' + editedItem._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedItem)
+    })
+      .then((result) => result.json())
+      .then((savedItem) => {
+        setWatchlist([...updatedWatchlist, savedItem]);
+        setItemToBeEdited();
+      })
+      .catch((error) => console.error(error));
   }
 
   // function removeFromWatchlist(itemToBeRemoved) {

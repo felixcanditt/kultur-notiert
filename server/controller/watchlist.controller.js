@@ -22,6 +22,23 @@ export function addToWatchlist(request, response) {
     .catch((error) => response.json(error.message));
 }
 
+export function editWatchlist(request, response) {
+  const { itemId } = request.params;
+  const updatedItem = request.body;
+  Watchlist.findByIdAndUpdate(
+    { _id: itemId },
+    updatedItem,
+    { new: true },
+    (error, doc) => {
+      if (error) {
+        response.json({ message: 'Could not update watchlist. ' });
+        return;
+      }
+      response.json(doc);
+    }
+  );
+}
+
 export function removeFromWatchlist(request, response) {
   const { itemId } = request.params;
   Watchlist.findByIdAndDelete({ _id: itemId }, (error, doc) => {

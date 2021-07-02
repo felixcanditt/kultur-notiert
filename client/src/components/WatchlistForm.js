@@ -42,6 +42,7 @@ export default function WatchlistForm({
     const selectedCategory = event.target.value;
 
     const itemWithCategory = {
+      _id: formItem._id,
       title: formItem.title,
       id: formItem.id,
       category: selectedCategory,
