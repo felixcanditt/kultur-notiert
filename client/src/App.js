@@ -45,6 +45,18 @@ export default function App() {
       );
   }, []);
 
+  // useEffect(() => {
+  //   updateLocalStorage('kulturNotiertWatchlist', watchlist);
+  // }, [watchlist]);
+
+  useEffect(() => {
+    updateLocalStorage('kulturNotiertLibrary', library);
+  }, [library]);
+
+  // function addToWatchlist(newItem) {
+  //   setWatchlist([newItem, ...watchlist]);
+  // }
+
   function addToWatchlist(newItem) {
     fetch('http://localhost:4000/watchlist', {
       method: 'POST',
@@ -62,7 +74,7 @@ export default function App() {
       })
     })
       .then((result) => result.json())
-      .then((savedItem) => setWatchlist([savedItem, ...watchlist]))
+      .then((savedItem) => setWatchlist([...watchlist, savedItem]))
       .catch((error) =>
         console.error(
           `Could not add the item ${newItem.title} to watchlist, please check the following error message: `,
@@ -70,18 +82,6 @@ export default function App() {
         )
       );
   }
-
-  // useEffect(() => {
-  //   updateLocalStorage('kulturNotiertWatchlist', watchlist);
-  // }, [watchlist]);
-
-  useEffect(() => {
-    updateLocalStorage('kulturNotiertLibrary', library);
-  }, [library]);
-
-  // function addToWatchlist(newItem) {
-  //   setWatchlist([newItem, ...watchlist]);
-  // }
 
   function editWatchlist(editedItem) {
     const updatedWatchlist = watchlist.filter(
@@ -91,11 +91,29 @@ export default function App() {
     setItemToBeEdited();
   }
 
+  // function removeFromWatchlist(itemToBeRemoved) {
+  //   const updatedWatchlist = watchlist.filter(
+  //     (item) => item.id !== itemToBeRemoved.id
+  //   );
+  //   setWatchlist(updatedWatchlist);
+  // }
+
   function removeFromWatchlist(itemToBeRemoved) {
-    const updatedWatchlist = watchlist.filter(
-      (item) => item.id !== itemToBeRemoved.id
-    );
-    setWatchlist(updatedWatchlist);
+    fetch('http://localhost:4000/watchlist/' + itemToBeRemoved._id, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then((result) => result.json())
+      .then((response) => {
+        if (response.data && response.data._id) {
+          const updatedWatchlist = watchlist.filter(
+            (item) => item._id !== response.data._id
+          );
+          setWatchlist(updatedWatchlist);
+        } else {
+          console.log(`Could not remove the item ${response.data.title}.`);
+        }
+      });
   }
 
   function checkItem(checkedItem) {
