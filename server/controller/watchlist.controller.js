@@ -9,7 +9,12 @@ export function getWatchlist(request, response) {
 export function addToWatchlist(request, response) {
   const newItem = new Watchlist({
     title: request.body.title,
-    category: request.body.category
+    category: request.body.category,
+    author: request.body.author,
+    director: request.body.director,
+    creator: request.body.creator,
+    location: request.body.location,
+    time: request.body.time
   });
   newItem
     .save()

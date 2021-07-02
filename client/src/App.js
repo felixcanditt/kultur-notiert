@@ -11,12 +11,13 @@ import Footer from './components/Footer';
 import { updateLocalStorage, loadFromLocalStorage } from './lib/localStorage';
 
 export default function App() {
-  const [serverMessage, setServerMessage] = useState([]);
-  console.log('serverMessage', serverMessage);
+  // const [serverMessage, setServerMessage] = useState([]);
 
-  const [watchlist, setWatchlist] = useState(
-    loadFromLocalStorage('kulturNotiertWatchlist') ?? []
-  );
+  const [watchlist, setWatchlist] = useState([]);
+
+  // const [watchlist, setWatchlist] = useState(
+  //   loadFromLocalStorage('kulturNotiertWatchlist') ?? []
+  // );
 
   const [library, setLibrary] = useState(
     loadFromLocalStorage('kulturNotiertLibrary') ?? []
@@ -26,23 +27,61 @@ export default function App() {
 
   const [currentPage, setCurrentPage] = useState('home');
 
-  useEffect(() => {
-    fetch('http://localhost:4000/')
-      .then((response) => response.json())
-      .then((response) => setServerMessage(response));
-  }, []);
+  // useEffect(() => {
+  //   fetch('http://localhost:4000/')
+  //     .then((response) => response.json())
+  //     .then((response) => setServerMessage(response));
+  // }, []);
 
   useEffect(() => {
-    updateLocalStorage('kulturNotiertWatchlist', watchlist);
-  }, [watchlist]);
+    fetch('http://localhost:4000/watchlist')
+      .then((result) => result.json())
+      .then((apiWatchlist) => setWatchlist(apiWatchlist))
+      .catch((error) =>
+        console.error(
+          `Could not fetch watchlist, please check the following error message: `,
+          error
+        )
+      );
+  }, []);
+
+  function addToWatchlist(newItem) {
+    fetch('http://localhost:4000/watchlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: newItem.title,
+        category: newItem.category,
+        author: newItem.author,
+        director: newItem.director,
+        creator: newItem.creator,
+        location: newItem.location,
+        time: newItem.time
+      })
+    })
+      .then((result) => result.json())
+      .then((savedItem) => setWatchlist([savedItem, ...watchlist]))
+      .catch((error) =>
+        console.error(
+          `Could not add the item ${newItem.title} to watchlist, please check the following error message: `,
+          error
+        )
+      );
+  }
+
+  // useEffect(() => {
+  //   updateLocalStorage('kulturNotiertWatchlist', watchlist);
+  // }, [watchlist]);
 
   useEffect(() => {
     updateLocalStorage('kulturNotiertLibrary', library);
   }, [library]);
 
-  function addToWatchlist(newItem) {
-    setWatchlist([newItem, ...watchlist]);
-  }
+  // function addToWatchlist(newItem) {
+  //   setWatchlist([newItem, ...watchlist]);
+  // }
 
   function editWatchlist(editedItem) {
     const updatedWatchlist = watchlist.filter(

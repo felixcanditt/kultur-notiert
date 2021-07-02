@@ -23,7 +23,7 @@ export default function WatchlistCards({
     <Grid>
       {listToBeRendered().map((item) => (
         <WatchlistCard
-          key={item.id}
+          key={item._id}
           item={item}
           onSetItemToBeEdited={onSetItemToBeEdited}
           onRemoveFromWatchlist={onRemoveFromWatchlist}
