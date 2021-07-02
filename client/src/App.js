@@ -11,6 +11,9 @@ import Footer from './components/Footer';
 import { updateLocalStorage, loadFromLocalStorage } from './lib/localStorage';
 
 export default function App() {
+  const [serverMessage, setServerMessage] = useState([]);
+  console.log('serverMessage', serverMessage);
+
   const [watchlist, setWatchlist] = useState(
     loadFromLocalStorage('kulturNotiertWatchlist') ?? []
   );
@@ -22,6 +25,12 @@ export default function App() {
   const [itemToBeEdited, setItemToBeEdited] = useState('');
 
   const [currentPage, setCurrentPage] = useState('home');
+
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+      .then((response) => response.json())
+      .then((response) => setServerMessage(response));
+  }, []);
 
   useEffect(() => {
     updateLocalStorage('kulturNotiertWatchlist', watchlist);
