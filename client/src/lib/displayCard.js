@@ -62,11 +62,11 @@ export function displayCategory(savedCategory) {
 
 export function displayDetails(savedItem) {
   if (savedItem.category === 'book') {
-    return <>{savedItem.author && <p>von {savedItem.author}</p>}</>;
+    return <>{savedItem.creator && <p>von {savedItem.creator}</p>}</>;
   } else if (savedItem.category === 'movie') {
     return (
       <>
-        {savedItem.director ? <p>von {savedItem.director}</p> : ''}
+        {savedItem.creator ? <p>von {savedItem.creator}</p> : ''}
         {savedItem.location ? <p>gibt's hier: {savedItem.location}</p> : ''}
       </>
     );
@@ -77,7 +77,7 @@ export function displayDetails(savedItem) {
   } else if (savedItem.category === 'music' || 'miscellaneous') {
     return (
       <>
-        {savedItem.musicBy ? <p>von {savedItem.creator}</p> : ''}
+        {savedItem.creator ? <p>von {savedItem.creator}</p> : ''}
         {savedItem.location ? <p>Wo? {savedItem.location}</p> : ''}
         {savedItem.time ? <p>Wann? {savedItem.time}</p> : ''}
       </>

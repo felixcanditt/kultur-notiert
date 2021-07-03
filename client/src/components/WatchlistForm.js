@@ -15,13 +15,13 @@ export default function WatchlistForm({
 }) {
   const initialFormItem = {
     title: '',
-    id: '',
+    uuid: '',
     category: '',
-    author: '',
-    director: '',
     creator: '',
     location: '',
-    time: ''
+    time: '',
+    rating: 0,
+    notes: ''
   };
 
   const [formItem, setFormItem] = useState(initialFormItem);
@@ -44,10 +44,8 @@ export default function WatchlistForm({
     const itemWithCategory = {
       _id: formItem._id,
       title: formItem.title,
-      id: formItem.id,
+      uuid: formItem.uuid,
       category: selectedCategory,
-      author: '',
-      director: '',
       creator: '',
       location: '',
       time: ''

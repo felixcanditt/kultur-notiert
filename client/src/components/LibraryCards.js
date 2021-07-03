@@ -11,10 +11,12 @@ export default function LibraryCards({
   onCheckItem
 }) {
   function listToBeRendered() {
+    const libraryNewOnTop = library.slice().reverse();
+
     const libraryNewest = library.slice(0, 2);
     let relevantList;
     currentPage === 'library'
-      ? (relevantList = library)
+      ? (relevantList = libraryNewOnTop)
       : (relevantList = libraryNewest);
     return relevantList;
   }
@@ -23,7 +25,7 @@ export default function LibraryCards({
     <Grid>
       {listToBeRendered().map((item) => (
         <LibraryCard
-          key={item.id}
+          key={item._id}
           item={item}
           onSetItemToBeEdited={onSetItemToBeEdited}
           onRemoveFromLibrary={onRemoveFromLibrary}

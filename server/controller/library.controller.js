@@ -1,13 +1,13 @@
-import Watchlist from '../models/watchlist.model.js';
+import Library from '../models/library.model.js';
 
-export function getWatchlist(request, response) {
-  Watchlist.find()
-    .then((watchlist) => response.json(watchlist))
+export function getLibrary(request, response) {
+  Library.find()
+    .then((library) => response.json(library))
     .catch((error) => response.json(error.message));
 }
 
-export function addToWatchlist(request, response) {
-  const newItem = new Watchlist({
+export function addToLibrary(request, response) {
+  const newItem = new Library({
     title: request.body.title,
     category: request.body.category,
     creator: request.body.creator,
@@ -22,16 +22,16 @@ export function addToWatchlist(request, response) {
     .catch((error) => response.json(error.message));
 }
 
-export function editWatchlist(request, response) {
+export function editLibrary(request, response) {
   const { itemId } = request.params;
   const updatedItem = request.body;
-  Watchlist.findByIdAndUpdate(
+  Library.findByIdAndUpdate(
     { _id: itemId },
     updatedItem,
     { new: true },
     (error, doc) => {
       if (error) {
-        response.json({ message: 'Could not update watchlist.' });
+        response.json({ message: 'Could not update library.' });
         return;
       }
       response.json(doc);
@@ -39,9 +39,9 @@ export function editWatchlist(request, response) {
   );
 }
 
-export function removeFromWatchlist(request, response) {
+export function removeFromLibrary(request, response) {
   const { itemId } = request.params;
-  Watchlist.findByIdAndDelete({ _id: itemId }, (error, doc) => {
+  Library.findByIdAndDelete({ _id: itemId }, (error, doc) => {
     if (error) {
       response.json({
         success: false,

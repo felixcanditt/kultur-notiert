@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const watchlistItemSchema = new mongoose.Schema({
+const libraryItemSchema = new mongoose.Schema({
   title: String,
   category: String,
   creator: String,
@@ -10,6 +10,6 @@ const watchlistItemSchema = new mongoose.Schema({
   notes: String
 });
 
-const Watchlist = mongoose.model('watchlist-item', watchlistItemSchema);
+const Library = mongoose.model('library-item', libraryItemSchema);
 
-export default Watchlist;
+export default Library;

@@ -11,13 +11,9 @@ import Footer from './components/Footer';
 import { updateLocalStorage, loadFromLocalStorage } from './lib/localStorage';
 
 export default function App() {
-  // const [serverMessage, setServerMessage] = useState([]);
-
-  const [watchlist, setWatchlist] = useState([]);
-
-  // const [watchlist, setWatchlist] = useState(
-  //   loadFromLocalStorage('kulturNotiertWatchlist') ?? []
-  // );
+  const [watchlist, setWatchlist] = useState(
+    loadFromLocalStorage('kulturNotiertWatchlist') ?? []
+  );
 
   const [library, setLibrary] = useState(
     loadFromLocalStorage('kulturNotiertLibrary') ?? []
@@ -45,17 +41,25 @@ export default function App() {
       );
   }, []);
 
-  // useEffect(() => {
-  //   updateLocalStorage('kulturNotiertWatchlist', watchlist);
-  // }, [watchlist]);
+  useEffect(() => {
+    fetch('http://localhost:4000/library')
+      .then((result) => result.json())
+      .then((apiLibrary) => setLibrary(apiLibrary))
+      .catch((error) =>
+        console.error(
+          `Could not fetch library, please check the following error message: `,
+          error
+        )
+      );
+  }, []);
+
+  useEffect(() => {
+    updateLocalStorage('kulturNotiertWatchlist', watchlist);
+  }, [watchlist]);
 
   useEffect(() => {
     updateLocalStorage('kulturNotiertLibrary', library);
   }, [library]);
-
-  // function addToWatchlist(newItem) {
-  //   setWatchlist([newItem, ...watchlist]);
-  // }
 
   function addToWatchlist(newItem) {
     fetch('http://localhost:4000/watchlist', {
@@ -66,11 +70,11 @@ export default function App() {
       body: JSON.stringify({
         title: newItem.title,
         category: newItem.category,
-        author: newItem.author,
-        director: newItem.director,
         creator: newItem.creator,
         location: newItem.location,
-        time: newItem.time
+        time: newItem.time,
+        rating: newItem.rating,
+        notes: newItem.notes
       })
     })
       .then((result) => result.json())
@@ -82,12 +86,6 @@ export default function App() {
         )
       );
   }
-
-  // function editWatchlist(editedItem) {
-  //   const updatedWatchlist = watchlist.filter(
-  //     (item) => item.id !== editedItem.id
-  //   );
-  // }
 
   function editWatchlist(editedItem) {
     const updatedWatchlist = watchlist.filter(
@@ -108,13 +106,6 @@ export default function App() {
       })
       .catch((error) => console.error(error));
   }
-
-  // function removeFromWatchlist(itemToBeRemoved) {
-  //   const updatedWatchlist = watchlist.filter(
-  //     (item) => item.id !== itemToBeRemoved.id
-  //   );
-  //   setWatchlist(updatedWatchlist);
-  // }
 
   function removeFromWatchlist(itemToBeRemoved) {
     fetch('http://localhost:4000/watchlist/' + itemToBeRemoved._id, {
@@ -144,7 +135,7 @@ export default function App() {
         ...checkedItem,
         rating: currentRating()
       };
-      setLibrary([checkedItemWithRating, ...library]);
+      addToLibrary(checkedItemWithRating);
       removeFromWatchlist(checkedItem);
     } else if (library.find((item) => item.id === checkedItem.id)) {
       addToWatchlist(checkedItem);
@@ -153,20 +144,67 @@ export default function App() {
   }
 
   function addToLibrary(newItem) {
-    setLibrary([newItem, ...library]);
+    fetch('http://localhost:4000/library', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: newItem.title,
+        category: newItem.category,
+        creator: newItem.creator,
+        location: newItem.location,
+        time: newItem.time,
+        rating: newItem.rating,
+        notes: newItem.notes
+      })
+    })
+      .then((result) => result.json())
+      .then((savedItem) => setLibrary([...library, savedItem]))
+      .catch((error) =>
+        console.error(
+          `Could not add the item ${newItem.title} to library, please check the following error message: `,
+          error
+        )
+      );
   }
 
   function editLibrary(editedItem) {
-    const editedLibrary = library.filter((item) => item.id !== editedItem.id);
-    setLibrary([editedItem, ...editedLibrary]);
-    setItemToBeEdited();
+    const updatedLibrary = library.filter(
+      (item) => item._id !== editedItem._id
+    );
+
+    fetch('http://localhost:4000/library/' + editedItem._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedItem)
+    })
+      .then((result) => result.json())
+      .then((savedItem) => {
+        setLibrary([...updatedLibrary, savedItem]);
+        setItemToBeEdited();
+      })
+      .catch((error) => console.error(error));
   }
 
   function removeFromLibrary(itemToBeRemoved) {
-    const updatedLibrary = library.filter(
-      (item) => item.id !== itemToBeRemoved.id
-    );
-    setLibrary(updatedLibrary);
+    fetch('http://localhost:4000/library/' + itemToBeRemoved._id, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then((result) => result.json())
+      .then((response) => {
+        if (response.data && response.data._id) {
+          const updatedLibrary = library.filter(
+            (item) => item._id !== response.data._id
+          );
+          setLibrary(updatedLibrary);
+        } else {
+          console.log(`Could not remove the item ${response.data.title}.`);
+        }
+      });
   }
 
   return (

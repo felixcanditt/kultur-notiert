@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 
 import watchlistRoutes from './routes/watchlist.routes.js';
+import libraryRoutes from './routes/library.routes.js';
 
 const connectionString = 'mongodb://localhost:27017/kultur-notiert';
 
@@ -22,5 +23,6 @@ server.get('/', (request, response) =>
 );
 
 server.use(watchlistRoutes);
+server.use(libraryRoutes);
 
 server.listen(4000);

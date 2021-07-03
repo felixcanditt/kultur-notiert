@@ -15,8 +15,11 @@ export default function LibraryForm({
 }) {
   const initialFormItem = {
     title: '',
-    id: '',
+    uuid: '',
     category: '',
+    creator: '',
+    location: '',
+    time: '',
     rating: 0,
     notes: ''
   };

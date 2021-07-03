@@ -6,7 +6,7 @@ export default function InputOptions({ formItem, onUpdateFormItem }) {
           <span>Autor*in</span>
           <input
             type="text"
-            name="author"
+            name="creator"
             onChange={onUpdateFormItem}
             value={formItem.author}
           />
@@ -19,7 +19,7 @@ export default function InputOptions({ formItem, onUpdateFormItem }) {
             <span>Regisseur*in</span>
             <input
               type="text"
-              name="director"
+              name="creator"
               onChange={onUpdateFormItem}
               value={formItem.director}
             />
