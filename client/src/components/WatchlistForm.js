@@ -15,16 +15,17 @@ export default function WatchlistForm({
 }) {
   const initialFormItem = {
     title: '',
-    id: '',
+    uuid: '',
     category: '',
-    author: '',
-    director: '',
     creator: '',
     location: '',
-    time: ''
+    time: '',
+    rating: 0,
+    notes: ''
   };
 
   const [formItem, setFormItem] = useState(initialFormItem);
+
   useEffect(() => {
     if (itemToBeEdited) {
       setFormItem(itemToBeEdited);
@@ -41,11 +42,10 @@ export default function WatchlistForm({
     const selectedCategory = event.target.value;
 
     const itemWithCategory = {
+      _id: formItem._id,
       title: formItem.title,
-      id: formItem.id,
+      uuid: formItem.uuid,
       category: selectedCategory,
-      author: '',
-      director: '',
       creator: '',
       location: '',
       time: ''
@@ -60,7 +60,7 @@ export default function WatchlistForm({
       ? onEditWatchlist(formItem)
       : onAddToWatchlist({ ...formItem, id: uuidv4() });
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormCancelation(event) {
@@ -69,7 +69,7 @@ export default function WatchlistForm({
       onSetItemToBeEdited();
     }
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormReset() {

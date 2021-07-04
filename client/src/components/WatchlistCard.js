@@ -15,7 +15,7 @@ export default function WatchlistCard({
 }) {
   function handleClickOnEdit(clickedItem) {
     onSetItemToBeEdited(clickedItem);
-    onSetFormOnScreen(true);
+    onSetFormOnScreen('watchlist');
   }
 
   return (

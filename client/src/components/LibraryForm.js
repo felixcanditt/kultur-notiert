@@ -15,8 +15,11 @@ export default function LibraryForm({
 }) {
   const initialFormItem = {
     title: '',
-    id: '',
+    uuid: '',
     category: '',
+    creator: '',
+    location: '',
+    time: '',
     rating: 0,
     notes: ''
   };
@@ -41,7 +44,7 @@ export default function LibraryForm({
       ? onEditLibrary(formItem)
       : onAddToLibrary({ ...formItem, id: uuidv4() });
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormCancelation(event) {
@@ -50,7 +53,7 @@ export default function LibraryForm({
       onSetItemToBeEdited();
     }
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormReset() {

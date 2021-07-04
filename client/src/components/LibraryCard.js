@@ -36,7 +36,7 @@ export default function LibraryCard({
 
   function handleClickOnEdit(clickedItem) {
     onSetItemToBeEdited(clickedItem);
-    onSetFormOnScreen(true);
+    onSetFormOnScreen('library');
   }
 
   return (

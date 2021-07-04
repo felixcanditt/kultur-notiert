@@ -11,10 +11,11 @@ export default function WatchlistCards({
   onCheckItem
 }) {
   function listToBeRendered() {
-    const watchlistNewest = watchlist.slice(0, 2);
+    const watchlistNewOnTop = watchlist.slice().reverse();
+    const watchlistNewest = watchlistNewOnTop.slice(0, 2);
     let relevantList;
     currentPage === 'watchlist'
-      ? (relevantList = watchlist)
+      ? (relevantList = watchlistNewOnTop)
       : (relevantList = watchlistNewest);
     return relevantList;
   }
@@ -23,7 +24,7 @@ export default function WatchlistCards({
     <Grid>
       {listToBeRendered().map((item) => (
         <WatchlistCard
-          key={item.id}
+          key={item._id}
           item={item}
           onSetItemToBeEdited={onSetItemToBeEdited}
           onRemoveFromWatchlist={onRemoveFromWatchlist}

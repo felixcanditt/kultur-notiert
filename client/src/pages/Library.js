@@ -23,7 +23,7 @@ export default function Library({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [formOnScreen, setFormOnScreen] = useState(false);
+  const [formOnScreen, setFormOnScreen] = useState('none');
 
   return (
     <main>
@@ -32,11 +32,11 @@ export default function Library({
         <img
           src={plusIcon}
           alt="Neuen Eintrag zu Meiner Sammlung hinzufügen"
-          onClick={() => setFormOnScreen(true)}
+          onClick={() => setFormOnScreen('library')}
         />
       </TitleWrapper>
 
-      {formOnScreen && (
+      {formOnScreen === 'library' && (
         <LibraryForm
           onSetFormOnScreen={setFormOnScreen}
           onAddToLibrary={onAddToLibrary}

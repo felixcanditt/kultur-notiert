@@ -23,21 +23,7 @@ export default function Home({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [formOnScreen, setFormOnScreen] = useState(false);
-  const [formToBeShown, setFormToBeShown] = useState('none');
-
-  useEffect(() => {
-    if (itemToBeEdited) {
-      if (watchlist.find((item) => item.id === itemToBeEdited.id)) {
-        setFormToBeShown('watchlist');
-      } else if (library.find((item) => item.id === itemToBeEdited.id)) {
-        setFormToBeShown('library');
-      }
-    } else {
-      setFormToBeShown('none');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formOnScreen]);
+  const [formOnScreen, setFormOnScreen] = useState('none');
 
   return (
     <>
@@ -62,7 +48,7 @@ export default function Home({
           onCheckItem={onCheckItem}
         />
 
-        {formToBeShown === 'watchlist' && (
+        {formOnScreen === 'watchlist' && (
           <WatchlistForm
             onSetFormOnScreen={setFormOnScreen}
             itemToBeEdited={itemToBeEdited}
@@ -70,7 +56,7 @@ export default function Home({
             onEditWatchlist={onEditWatchlist}
           />
         )}
-        {formToBeShown === 'library' && (
+        {formOnScreen === 'library' && (
           <LibraryForm
             onSetFormOnScreen={setFormOnScreen}
             itemToBeEdited={itemToBeEdited}
