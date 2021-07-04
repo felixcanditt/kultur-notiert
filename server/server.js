@@ -28,6 +28,10 @@ server.use(cors());
 
 server.use(express.json());
 
+server.get('/health', (request, response) =>
+  response.json('This is my test message to see if the server is running.')
+);
+
 server.use(watchlistRoutes);
 server.use(libraryRoutes);
 
@@ -36,10 +40,6 @@ server.use(express.static(path.join(__dirname, '../client/build')));
 server.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
-
-server.get('/health', (request, response) =>
-  response.json('This is my test message to see if the server is running.')
-);
 
 const port = process.env.PORT || 4000;
 server.listen(port);
