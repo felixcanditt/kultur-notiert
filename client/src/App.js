@@ -23,12 +23,6 @@ export default function App() {
 
   const [currentPage, setCurrentPage] = useState('home');
 
-  // useEffect(() => {
-  //   fetch('http://localhost:4000/')
-  //     .then((response) => response.json())
-  //     .then((response) => setServerMessage(response));
-  // }, []);
-
   useEffect(() => {
     fetch('/watchlist')
       .then((result) => result.json())
