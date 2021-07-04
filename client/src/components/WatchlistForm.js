@@ -60,7 +60,7 @@ export default function WatchlistForm({
       ? onEditWatchlist(formItem)
       : onAddToWatchlist({ ...formItem, id: uuidv4() });
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormCancelation(event) {
@@ -69,7 +69,7 @@ export default function WatchlistForm({
       onSetItemToBeEdited();
     }
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormReset() {

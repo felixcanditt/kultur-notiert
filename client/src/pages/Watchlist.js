@@ -23,7 +23,7 @@ export default function Watchlist({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [formOnScreen, setFormOnScreen] = useState(false);
+  const [formOnScreen, setFormOnScreen] = useState('none');
 
   return (
     <main>
@@ -32,11 +32,11 @@ export default function Watchlist({
         <img
           src={plusIcon}
           alt="Neuen Eintrag zur Merkliste hinzufügen"
-          onClick={() => setFormOnScreen(true)}
+          onClick={() => setFormOnScreen('watchlist')}
         />
       </TitleWrapper>
 
-      {formOnScreen && (
+      {formOnScreen === 'watchlist' && (
         <WatchlistForm
           onSetFormOnScreen={setFormOnScreen}
           onAddToWatchlist={onAddToWatchlist}

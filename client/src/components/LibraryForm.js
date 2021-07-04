@@ -44,7 +44,7 @@ export default function LibraryForm({
       ? onEditLibrary(formItem)
       : onAddToLibrary({ ...formItem, id: uuidv4() });
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormCancelation(event) {
@@ -53,7 +53,7 @@ export default function LibraryForm({
       onSetItemToBeEdited();
     }
     setFormItem(initialFormItem);
-    onSetFormOnScreen(false);
+    onSetFormOnScreen('none');
   }
 
   function handleFormReset() {
