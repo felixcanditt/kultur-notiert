@@ -1,16 +1,16 @@
 {
   "name": "kultur-notiert",
   "version": "1.0.0",
-  "description": "## Kultur Notiert is my capstone project for neuefische Web Development Bootcamp",
+  "description": "Kultur Notiert is my capstone project for neuefische Web Development Bootcamp",
   "main": "index.js",
   "scripts": {
     "build": "cd ./client && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "client": "cd ./client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd ./server && npm start",
     "start": "node ./server/server.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "postinstall": "cd ./client && npm install"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd ./client && npm install && cd ../server && npm install"
   },
   "repository": {
     "type": "git",
