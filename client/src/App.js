@@ -30,7 +30,7 @@ export default function App() {
   // }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4000/watchlist')
+    fetch('/watchlist')
       .then((result) => result.json())
       .then((apiWatchlist) => setWatchlist(apiWatchlist))
       .catch((error) =>
@@ -42,7 +42,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:4000/library')
+    fetch('/library')
       .then((result) => result.json())
       .then((apiLibrary) => setLibrary(apiLibrary))
       .catch((error) =>
@@ -62,7 +62,7 @@ export default function App() {
   }, [library]);
 
   function addToWatchlist(newItem) {
-    fetch('http://localhost:4000/watchlist', {
+    fetch('/watchlist', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ export default function App() {
       (item) => item._id !== editedItem._id
     );
 
-    fetch('http://localhost:4000/watchlist/' + editedItem._id, {
+    fetch('/watchlist/' + editedItem._id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -108,7 +108,7 @@ export default function App() {
   }
 
   function removeFromWatchlist(itemToBeRemoved) {
-    fetch('http://localhost:4000/watchlist/' + itemToBeRemoved._id, {
+    fetch('/watchlist/' + itemToBeRemoved._id, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     })
@@ -144,7 +144,7 @@ export default function App() {
   }
 
   function addToLibrary(newItem) {
-    fetch('http://localhost:4000/library', {
+    fetch('/library', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -174,7 +174,7 @@ export default function App() {
       (item) => item._id !== editedItem._id
     );
 
-    fetch('http://localhost:4000/library/' + editedItem._id, {
+    fetch('/library/' + editedItem._id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -190,7 +190,7 @@ export default function App() {
   }
 
   function removeFromLibrary(itemToBeRemoved) {
-    fetch('http://localhost:4000/library/' + itemToBeRemoved._id, {
+    fetch('/library/' + itemToBeRemoved._id, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' }
     })
