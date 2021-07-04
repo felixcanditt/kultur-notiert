@@ -29,4 +29,5 @@ server.get('/', (request, response) =>
 server.use(watchlistRoutes);
 server.use(libraryRoutes);
 
-server.listen(4000);
+const port = process.env.PORT || 4000;
+server.listen(PORT);
