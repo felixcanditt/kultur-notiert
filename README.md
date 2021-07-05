@@ -34,7 +34,7 @@ You can install and run my app on your device if you use MongoDB. The app will t
 
 After cloning this repository, simply run `npm install` in the main directory – this will also install all dependencies of `client` and the Express `server`.
 
-Then start the app by entering `npm run dev`.
+Then start the app by entering `npm run dev` and open http://localhost:3000/ to view it in the browser.
 
 Make sure your MongoDB is up and running.
 
