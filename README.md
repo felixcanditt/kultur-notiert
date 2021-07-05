@@ -18,17 +18,14 @@ Enjoy <3
 
 There are two versions of my app.
 
-1. Shared version (with database)
+### Shared version (with database)
 
 If you add entries to this app version, they are stored in an online database and can be seen and edited by other people using the app. Click [this link](https://kultur-notiert.herokuapp.com/) to see it.
 
-2. Personalized version (with local storage)
+### Personalized version (with local storage)
 
 You can have your own Kultur Notiert version that stores your entries on your device only and doesn't post them online. To do so, click [this link](https://kultur-notiert.vercel.app/).
 
-### 
-
-If you add entries to the app, they are stored in an online database and can be seen and edited by other people using the app. If you want to have your own version of Kultur Notiert where entries are stored on your device and aren't shared online, you can 
 
 ## How to install and run this app
 
