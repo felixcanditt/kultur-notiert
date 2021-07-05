@@ -8,7 +8,7 @@ In this app, you can create a list with all those books you never manage to read
 
 You will end up with your personal culture watchlist (books, movies, series, music, performing arts, exhibitions, festivals).
 
-Once read or watched or visited, you can store these cultural experiences in your personal collection. Feel free to add a rating or notes.
+Once read or watched or visited, you can store these cultural experiences in your personal library. Feel free to add a rating or notes.
 
 Enjoy <3
 
