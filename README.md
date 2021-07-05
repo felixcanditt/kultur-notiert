@@ -27,6 +27,10 @@ You can have your own Kultur Notiert version that stores your entries on your de
 
 ## How to install and run this app
 
-After cloning this repository, simply run `npm install` in the main directory -  – this will also install all dependencies of `client` and the Express `server`.
+You can install and run my app on your device if you use MongoDB. The app will then store data locally. 
+
+After cloning this repository, checkout to branch `local-db` and run `npm install` in the main directory -  – this will also install all dependencies of `client` and the Express `server`.
 
 Then start the app by entering `npm run dev`.
+
+Make sure your MongoDB is up and running.
