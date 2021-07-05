@@ -40,4 +40,4 @@ Make sure your MongoDB is up and running.
 
 ### You don't use MongoDB?
 
-You can still install my app by cloning [this repository]((https://github.com/felixcanditt/kultur-notiert-vercel) which works with localStorage instead of MongoDB.
+You can still install my app by cloning [this repository](https://github.com/felixcanditt/kultur-notiert-vercel) which works with localStorage instead of MongoDB.
