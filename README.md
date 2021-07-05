@@ -24,6 +24,9 @@ If you add entries to this app version, they are stored in an online database an
 
 You can have your own Kultur Notiert version that stores your entries on your device only and doesn't post them online. To do so, click [this link](https://kultur-notiert.vercel.app/).
 
+## About this repository
+
+This is the repository for the app version running with MongoDB and deployed on Heroku. To see the version using localStorage and Vercel, visit [this repository](https://github.com/felixcanditt/kultur-notiert-vercel).
 
 ## How to install and run this app
 
@@ -34,3 +37,7 @@ After cloning this repository, simply run `npm install` in the main directory â€
 Then start the app by entering `npm run dev`.
 
 Make sure your MongoDB is up and running.
+
+### You don't use MongoDB?
+
+You can still install my app by cloning [this repository]((https://github.com/felixcanditt/kultur-notiert-vercel) which works with localStorage instead of MongoDB.
