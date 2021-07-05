@@ -14,8 +14,6 @@ Enjoy <3
 
 ## You can see and use my app here
 
-[Link to Kultur Notiert](https://kultur-notiert.herokuapp.com/)
-
 There are two versions of my app.
 
 ### Shared version (with database)
